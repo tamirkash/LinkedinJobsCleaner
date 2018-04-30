@@ -1,0 +1,22 @@
+{
+  "name": "Linkedin Jobs Cleaner",
+  "version": "1.0",
+  "description": "Remove jobs you don't want to see anymore",
+  "permissions": [
+  	"tabs",
+  	"storage",
+  	"https://www.linkedin.com/jobs/search/*"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+  	{
+  		"matches": ["https://www.linkedin.com/jobs/search/*"],
+  		"js": ["jquery.js", "content.js"],
+  		"css": ["content.css"]
+  	}
+  ],
+  "manifest_version": 2
+}
