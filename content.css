@@ -1,0 +1,12 @@
+.remove-job-icon:hover {
+	cursor: pointer;
+	background-color: red;
+}
+
+.remove-job-icon {
+	height: 18px;
+	width: 18px;
+	margin-top: 5px;
+	border: 1px solid red;
+	border-radius: 50%;
+}
