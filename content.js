@@ -1,15 +1,7 @@
-// chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
-//     if (msg === 'url-update') {
-//         initPage();
-//     }
-// });
-
-$(document).on('DOMNodeInserted', function(element){
-  if($(element.target).hasClass('jobs-search-results__list') && 
-    $(element.target).find('.remove-job-icon').length === 0){
-    console.log('test');
-    initPage()
-  }
+chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
+    if (msg === 'url-update') {
+        initPage();
+    }
 });
 
 function initPage(){
@@ -18,7 +10,7 @@ function initPage(){
     if(obj.removed){
       obj.removed.forEach(function(element){
         console.log(element);
-        $('#' + element).remove();
+        $('div[data-job-id=' + element + ']').closest('li').remove();
       })
     }
   });
@@ -47,7 +39,7 @@ function initPage(){
 
   function addRemoveIconEvent(element){
     element.click(function(){
-      const parent = $(this).closest('li');
+      const parent = $(this).closest('li > div');
       
       chrome.storage.sync.get('removed', function(obj){
         let removed = obj.removed;
@@ -56,11 +48,11 @@ function initPage(){
           removed = [];
         }
 
-        removed.push(parent.attr('id'));
+        removed.push(parent.attr('data-job-id'));
         chrome.storage.sync.set({'removed': removed});
       })
 
-      parent.remove();
+      parent.closest('li').remove();
     })
   }
 }
