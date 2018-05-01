@@ -5,11 +5,9 @@ chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 });
 
 function initPage(){
-  // chrome.storage.sync.clear()
   chrome.storage.sync.get('removed', function(obj){
     if(obj.removed){
       obj.removed.forEach(function(element){
-        console.log(element);
         $('div[data-job-id=' + element + ']').closest('li').remove();
       })
     }
